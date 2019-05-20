@@ -92,7 +92,7 @@ public class Rsa
         }
         catch (Exception)
         {
-            throw;
+            cipherText = "Girilen asalsayı çok büyük";
         }
     }
 
@@ -135,8 +135,7 @@ public class Rsa
         }
         catch (Exception)
         {
-
-            throw;
+            plainText = "Girilen asalsayı çok büyük";
         }
 
     }
