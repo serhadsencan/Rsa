@@ -48,14 +48,14 @@ public class Rsa
     {
          n = P * Q;
          N = (P-1) * (Q-1);
-        Console.WriteLine("n == "+ n+ "  N == "+ N);
-        Console.WriteLine("e ::::"+e.ToString());
+       // Console.WriteLine("n == "+ n+ "  N == "+ N);
+      //  Console.WriteLine("e ::::"+e.ToString());
         for (int i = 3; i < N; i++)
         {
             if (gcd(i, N) == 1)
             {
                 e = i;
-                Console.WriteLine("E == " + e);
+               // Console.WriteLine("E == " + e);
                 break;
             }
 
@@ -77,24 +77,16 @@ public class Rsa
             for (int j = 0; j < e; j++)
             {
                 temp = mod(temp * Convert.ToInt32(m[i]),n);
-                cipher[i] = temp;
-                //Console.WriteLine("Cipher1 :"+m[i].ToString());
+                cipher[i] = temp;                
             }
-            //Console.WriteLine("cipher val :: "+ cipher[i]+ " i ::"+i);
-            //Console.WriteLine("n val :: "+ n.ToString());
-            //Console.WriteLine("mod val :: " + (mod(cipher[i], n).ToString()));
-            last[i] = Convert.ToByte(mod(cipher[i],256));
-            
            
-            mod(last[i],n);
-            //Console.WriteLine("Last ::" + last[i]);
-            //Console.WriteLine("mod == "+ mod(cipher[i],n).ToString());
+            last[i] = Convert.ToByte(mod(cipher[i],256));            
             temp = 1;
 
         }
 
         cipherText = System.Text.Encoding.UTF8.GetString(last);
-        Console.WriteLine(cipherText);
+      
         
     }
 
@@ -105,18 +97,17 @@ public class Rsa
         {
             d++;
         }
-        //Console.WriteLine("DDDDDD::::"+d.ToString());
+       
         
     }
 
-    ///    47458321         47,458,246‬
-    ///    abcçdefgğhiıjklmnoöprsştuüvyz
+    
 
     public void Decyrpt()
     {
         int temp = 1;
         int[] tempArr = new int[last.Length];
-        char[] tempchar = new char[last.Length];
+        
        
         for (int i = 0; i < last.Length; i++)
         {
@@ -124,16 +115,16 @@ public class Rsa
             for (int j=0; j<d;j++)
             {
                 temp = mod(temp* Convert.ToInt32(cipher[i]),n);
-                //Console.WriteLine("temp  ::"+ temp+"  ::"+i.ToString());
+              
                 tempArr[i] = temp;
-               // Console.WriteLine("temppp ::: "+ temp+ " i ::"+ i);
+              
             }
             temp = 1;
-            Console.WriteLine("tempArr "+tempArr[i]);
+            
             last[i] = Convert.ToByte(tempArr[i]%256);
         }
         plainText = System.Text.Encoding.UTF8.GetString(last);
-        //plainText = new String(tempchar);
+       
 
        
     }

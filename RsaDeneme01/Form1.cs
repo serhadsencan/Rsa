@@ -19,37 +19,7 @@ namespace RsaDeneme01
         {
             InitializeComponent();
         }
-        
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            //Console.WriteLine(dataToEncrypt[0].ToString());
-            //string result = System.Text.Encoding.UTF8.GetString(dataToEncrypt);
-            //Console.WriteLine(result.ToString());
-            //int[] intArr = new int[2];
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    intArr[i] = intArr[i] * dataToEncrypt[i];
-            //}
-            //byte[] a = new byte[dataToEncrypt.Length];
-            //    Convert.ToByte(intArr[0] % 183);
-            //for (int j=0;j<dataToEncrypt.Length;j++)
-            //{
-
-            //}
-            //string encry = System.Text.Encoding.UTF8.GetString(a);
-            //Console.WriteLine(a);
-
-
-            //Console.WriteLine(rsa.gcd(1701,3768).ToString());
-            string first = "SerhatEymenSencan ve Emirhan Gumus projesi bitches";
-            byte[] dataToEncrypt = Encoding.ASCII.GetBytes(first);
-            
-            rsa.Gen_PublicKey(17,11);
-           
-
-        }
 
         private void btnEncyrpt_Click(object sender, EventArgs e)
         {

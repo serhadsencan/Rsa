@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.txtPlainText = new System.Windows.Forms.RichTextBox();
             this.txtCipherText = new System.Windows.Forms.RichTextBox();
             this.btnEncyrpt = new System.Windows.Forms.Button();
@@ -42,16 +41,6 @@
             this.txtMessage = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(615, 322);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Encyrpt";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtPlainText
             // 
@@ -173,7 +162,6 @@
             this.Controls.Add(this.btnEncyrpt);
             this.Controls.Add(this.txtCipherText);
             this.Controls.Add(this.txtPlainText);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -182,8 +170,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox txtPlainText;
         private System.Windows.Forms.RichTextBox txtCipherText;
         private System.Windows.Forms.Button btnEncyrpt;
