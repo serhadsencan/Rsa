@@ -24,7 +24,7 @@ namespace RsaDeneme01
 
         private void btnEncyrpt_Click(object sender, EventArgs e)
         {
-            rsa.Gen_PublicKey(Convert.ToInt16(txt_P_val.Text),Convert.ToInt16(txt_Q_val.Text));
+            rsa.Gen_PublicKey(BigInteger.Parse(txt_P_val.Text), BigInteger.Parse(txt_Q_val.Text));
             string plain = txtPlainText.Text;
             byte[] dataToEncrypt = Encoding.ASCII.GetBytes(plain);
             rsa.Encyrpt(dataToEncrypt);
