@@ -8,9 +8,9 @@ public class Rsa
 
     private BigInteger n;
     private BigInteger N;
-    private int e;
+    private BigInteger e;
     private BigInteger d;
-    private int[] cipher;
+    private BigInteger[] cipher;
     public string cipherText;
     public string plainText;
     private byte[] last;
@@ -53,14 +53,15 @@ public class Rsa
     {
         n = BigInteger.Multiply(P,Q);
         N = BigInteger.Multiply((P - 1), (Q - 1));
-        // Console.WriteLine("n == "+ n+ "  N == "+ N);
-        //  Console.WriteLine("e ::::"+e.ToString());
+
+         Console.WriteLine("n == "+ n+ "  N == "+ N);
+         
         for (int i = 3; i < N; i++)
         {
             if (BigInteger.GreatestCommonDivisor(i,N) == 1)
             {
                 e = i;
-                // Console.WriteLine("E == " + e);
+                 Console.WriteLine("E == " + e);
                 break;
             }
 
@@ -71,44 +72,46 @@ public class Rsa
 
     public void Encyrpt(byte[] m)
     {
-        try
-        {
-            cipher = new int[m.Length];
+        
+        
+            cipher = new BigInteger[m.Length];
 
             last = new byte[m.Length];
-            int temp = 1;
 
-            for (int i = 0; i < m.Length; i++)
-            {
 
-                for (int j = 0; j < e; j++)
-                {
-                    temp = mod(temp * Convert.ToInt32(m[i]), n);
-                    cipher[i] = temp;
-                }
+        for (int i = 0; i < m.Length; i++)
+        {
 
-                last[i] = Convert.ToByte(mod(cipher[i], 256));
-                temp = 1;
+            //for (int j = 0; j < e; j++)
+            //{
+            //    temp = mod(temp * Convert.ToInt32(m[i]), n);
+            //    cipher[i] = temp;
+            //}
+            cipher[i] = BigInteger.ModPow(m[i], e, n);
+
+            last[i] = (Byte)BigInteger.ModPow(cipher[i], 1, 256);
+            Console.WriteLine(cipher[i]);
 
             }
 
             cipherText = System.Text.Encoding.UTF8.GetString(last);
 
-        }
-        catch (Exception)
-        {
-            cipherText = "Girilen asalsayı çok büyük";
-        }
+        
+        
     }
 
     public void Gen_PrivateKey()
     {
         d = 0;
-        while (mod((e * d), N) != 1)
+        //while (mod((e * d), N) != 1)
+        //{
+        //    d++;
+        //}
+        while (BigInteger.ModPow(BigInteger.Multiply(e,d),1,N) != 1)
         {
             d++;
         }
-    }
+        Console.WriteLine("d::::"+d);    }
 
 
 
@@ -116,23 +119,24 @@ public class Rsa
     {
         try
         {
-            int temp = 1;
-            int[] tempArr = new int[last.Length];
+           
+            BigInteger[] tempArr = new BigInteger[last.Length];
 
 
             for (int i = 0; i < last.Length; i++)
             {
 
-                for (int j = 0; j < d; j++)
-                {
-                    temp = mod(temp * Convert.ToInt32(cipher[i]), n);
+                //for (int j = 0; j < d; j++)
+                //{
+                //    temp = mod(temp * Convert.ToInt32(cipher[i]), n);
 
-                    tempArr[i] = temp;
+                //    tempArr[i] = temp;
 
-                }
-                temp = 1;
+                //}
+                tempArr[i] = BigInteger.ModPow(cipher[i],d,n);
+                
 
-                last[i] = Convert.ToByte(tempArr[i] % 256);
+                last[i] = (Byte)BigInteger.ModPow(tempArr[i],1,256);
             }
             plainText = System.Text.Encoding.UTF8.GetString(last);
 
