@@ -47,16 +47,7 @@ namespace RsaDeneme01
             byte[] dataToEncrypt = Encoding.ASCII.GetBytes(first);
             
             rsa.Gen_PublicKey(17,11);
-            Console.WriteLine("End of publickey");
-            rsa.Gen_PrivateKey();
-            Console.WriteLine("End of privatekey");
-            rsa.Encyrpt(dataToEncrypt);
-            Console.WriteLine("End of encyrpt");
-            rsa.Decyrpt();
-            Console.WriteLine("End of decyrpt");
-            Console.WriteLine("Şifrelenecek mesaj : "+first);
-            Console.WriteLine("Cipher text : "+ rsa.cipherText);
-            Console.WriteLine("Decyrpted text : " + rsa.plainText);
+           
 
         }
 

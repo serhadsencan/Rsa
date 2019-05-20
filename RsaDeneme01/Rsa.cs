@@ -10,6 +10,7 @@ public class Rsa
     private int N;
     private int e;
     private int d;
+    private int[] cipher;
     public string cipherText;
     public string plainText;
     private byte[] last;
@@ -65,7 +66,7 @@ public class Rsa
 
     public void Encyrpt(byte[] m)
     {
-        int[] cipher = new int[m.Length];
+       cipher = new int[m.Length];
         
         last = new byte[m.Length];
         int temp = 1;
@@ -75,11 +76,14 @@ public class Rsa
             
             for (int j = 0; j < e; j++)
             {
-                temp = mod(temp * Convert.ToInt16(m[i]),n);
+                temp = mod(temp * Convert.ToInt32(m[i]),n);
                 cipher[i] = temp;
                 //Console.WriteLine("Cipher1 :"+m[i].ToString());
             }
-            last[i] = Convert.ToByte(mod(cipher[i], n));
+            //Console.WriteLine("cipher val :: "+ cipher[i]+ " i ::"+i);
+            //Console.WriteLine("n val :: "+ n.ToString());
+            //Console.WriteLine("mod val :: " + (mod(cipher[i], n).ToString()));
+            last[i] = Convert.ToByte(mod(cipher[i],256));
             
            
             mod(last[i],n);
@@ -101,11 +105,12 @@ public class Rsa
         {
             d++;
         }
-        Console.WriteLine("DDDDDD::::"+d.ToString());
+        //Console.WriteLine("DDDDDD::::"+d.ToString());
         
     }
 
     ///    47458321         47,458,246‬
+    ///    abcçdefgğhiıjklmnoöprsştuüvyz
 
     public void Decyrpt()
     {
@@ -118,14 +123,14 @@ public class Rsa
             
             for (int j=0; j<d;j++)
             {
-                temp = mod(temp * Convert.ToInt16(last[i]),n);
-                Console.WriteLine("temp  ::"+ temp+"  ::"+i.ToString());
+                temp = mod(temp* Convert.ToInt32(cipher[i]),n);
+                //Console.WriteLine("temp  ::"+ temp+"  ::"+i.ToString());
                 tempArr[i] = temp;
-                
-                //Console.WriteLine("tempppp:: "+temp.ToString()+" i :"+i.ToString());
+               // Console.WriteLine("temppp ::: "+ temp+ " i ::"+ i);
             }
             temp = 1;
-            last[i] = Convert.ToByte(tempArr[i]);
+            Console.WriteLine("tempArr "+tempArr[i]);
+            last[i] = Convert.ToByte(tempArr[i]%256);
         }
         plainText = System.Text.Encoding.UTF8.GetString(last);
         //plainText = new String(tempchar);
