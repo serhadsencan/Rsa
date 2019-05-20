@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,14 @@ namespace RsaDeneme01
             rsa.Gen_PrivateKey();
             rsa.Decyrpt();
             txtMessage.Text=   rsa.plainText;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BigInteger a, b;
+            a = 123213213221221211;
+            b = 213213213213213122;
+            rsa.Test(a,b);
         }
     }
 }

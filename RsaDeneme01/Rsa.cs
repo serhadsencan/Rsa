@@ -1,15 +1,15 @@
 ﻿using System;
-
+using System.Numerics;
 
 
 
 public class Rsa
 {
 
-    private int n;
-    private int N;
+    private BigInteger n;
+    private BigInteger N;
     private int e;
-    private int d;
+    private BigInteger d;
     private int[] cipher;
     public string cipherText;
     public string plainText;
@@ -42,17 +42,22 @@ public class Rsa
 
         return mod;
     }
-
-
-    public void Gen_PublicKey(int P, int Q)
+    public void Test(BigInteger P, BigInteger Q)
     {
-        n = P * Q;
-        N = (P - 1) * (Q - 1);
+        n = BigInteger.Multiply(P, Q);
+        Console.WriteLine(n);
+    }
+
+
+    public void Gen_PublicKey(BigInteger P, BigInteger Q)
+    {
+        n = BigInteger.Multiply(P,Q);
+        N = BigInteger.Multiply((P - 1), (Q - 1));
         // Console.WriteLine("n == "+ n+ "  N == "+ N);
         //  Console.WriteLine("e ::::"+e.ToString());
         for (int i = 3; i < N; i++)
         {
-            if (gcd(i, N) == 1)
+            if (BigInteger.GreatestCommonDivisor(i,N) == 1)
             {
                 e = i;
                 // Console.WriteLine("E == " + e);
