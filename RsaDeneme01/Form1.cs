@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +24,7 @@ namespace RsaDeneme01
 
         private void btnEncyrpt_Click(object sender, EventArgs e)
         {
-            rsa.Gen_PublicKey(Convert.ToInt16(txt_P_val.Text),Convert.ToInt16(txt_Q_val.Text));
+            rsa.Gen_PublicKey(BigInteger.Parse(txt_P_val.Text), BigInteger.Parse(txt_Q_val.Text));
             string plain = txtPlainText.Text;
             byte[] dataToEncrypt = Encoding.ASCII.GetBytes(plain);
             rsa.Encyrpt(dataToEncrypt);
@@ -35,6 +36,14 @@ namespace RsaDeneme01
             rsa.Gen_PrivateKey();
             rsa.Decyrpt();
             txtMessage.Text=   rsa.plainText;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BigInteger a, b;
+            a = 123213213221221211;
+            b = 213213213213213122;
+            rsa.Test(a,b);
         }
     }
 }
